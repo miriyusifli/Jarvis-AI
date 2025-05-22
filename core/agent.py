@@ -15,7 +15,7 @@ class CustomAgent(BaseChatModel):
     to connect to real LLM APIs, local models, or toolkits.
     """
 
-    ollama_client: object = OllamaClient()
+    ollama_client: object = Field(default=None)
 
     # Agent name for identification and logging
     agent_name: str = Field(default=None)
@@ -26,10 +26,19 @@ class CustomAgent(BaseChatModel):
     # Maximum allowed response length (characters)
     max_response_length: Optional[int] = Field(default=None)
 
-    def __init__(self, agent_name: str, **kwargs):
+    def __init__(
+        self,
+        agent_name: str,
+        response_prefix: Optional[str] = None,
+        max_response_length: Optional[int] = None,
+        ollama_client: Optional[object] = None,
+        **kwargs
+    ):
         super().__init__(**kwargs)
         self.agent_name = agent_name
-        self.response_prefix = f"{self.agent_name}: "
+        self.response_prefix = response_prefix.format(name=agent_name) if response_prefix else f"{agent_name}: "
+        self.max_response_length = max_response_length
+        self.ollama_client = ollama_client or OllamaClient()
 
     def _generate(
         self,

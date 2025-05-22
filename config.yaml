@@ -1,0 +1,9 @@
+agent:
+  name: "Jarvis"
+  response_prefix: "{name}: "  # {name} will be replaced with agent.name
+  max_response_length: 2000    # maximum number of characters in response
+
+llm:
+  model: "llama3.2"  # model name for Ollama
+  temperature: 0.7 # controls randomness (0.0 = deterministic, 1.0 = creative)
+  max_tokens: 500  # maximum number of tokens in response
