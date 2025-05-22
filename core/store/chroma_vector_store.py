@@ -1,9 +1,7 @@
 from pathlib import Path
 from typing import List, Optional
-import chromadb
-from chromadb.utils import embedding_functions
-from langchain_community.vectorstores import Chroma
-from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain_chroma import Chroma
+from langchain_huggingface import HuggingFaceEmbeddings
 
 
 class ChromaVectorStore:
@@ -32,5 +30,4 @@ class ChromaVectorStore:
         self.vector_store.persist()
 
     def is_empty(self) -> bool:
-        # Faster check by just trying to get one document
         return len(self.vector_store._collection.get(limit=1)['ids']) == 0

@@ -19,6 +19,7 @@ class OllamaClient:
             model=self.model,
             messages=[
                 {
+                    ##TODO try to get system message from config
                     "role": "system",
                     "content": """
                         Your personal name is Jarvis.  You are a helpful AI assistant serves for Miri with access to his personal information. Your primary goals are:
