@@ -71,7 +71,7 @@ class CustomAgent(BaseChatModel):
         enhanced_input = f"{context}{user_input}"
 
         # Generate response with context-enhanced input
-        response_text = self.agent_name + self.llm_client.chat(enhanced_input)
+        response_text = self.agent_name + ": " + self.llm_client.chat(enhanced_input)
 
         # Enforce maximum response length limit if specified
         if self.max_response_length:

@@ -41,6 +41,7 @@ def main():
         model=config["llm"]["model"],
         temperature=config["llm"]["temperature"],
         max_tokens=config["llm"]["max_tokens"],
+        system_message=config["agent"]["system_message"],
     )
 
     # Initialize vector store
