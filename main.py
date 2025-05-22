@@ -13,8 +13,8 @@ def load_config():
         return yaml.safe_load(f)
 
 
-def load_personal_data(vector_store: VectorStore):
-    """Load personal data into the vector store"""
+def load_rag_data(vector_store: VectorStore):
+    """Load RAG data into the vector store"""
     loader = DocumentLoader()
     data_dir = Path(__file__).parent / "data"
 
@@ -46,9 +46,12 @@ def main():
     # Initialize vector store
     vector_store = ChromaVectorStore()
 
-    # TODO load only if vector store is empty
-    # Load personal data into vector store
-    load_personal_data(vector_store)
+    # Load rag data into vector store only if it's empty
+    if vector_store.is_empty():
+        print("Vector store is empty. Loading RAG data...")
+        load_rag_data(vector_store)
+    else:
+        print("Using existing vector store data...")
 
     # Create agent with config and vector store
     agent = CustomAgent(

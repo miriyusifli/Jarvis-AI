@@ -30,3 +30,7 @@ class ChromaVectorStore:
 
     def persist(self):
         self.vector_store.persist()
+
+    def is_empty(self) -> bool:
+        # Faster check by just trying to get one document
+        return len(self.vector_store._collection.get(limit=1)['ids']) == 0
