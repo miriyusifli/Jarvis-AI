@@ -6,7 +6,7 @@ from typing import Optional
 class OllamaClient:
     def __init__(
         self,
-        model: str = "llama3.2",
+        model: str,
         temperature: float = 0.7,
         max_tokens: Optional[int] = None,
         system_message: str = "",
